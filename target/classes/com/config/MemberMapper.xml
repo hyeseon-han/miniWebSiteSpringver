@@ -23,7 +23,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="mypage" parameterType="String" resultType="MemberDTO">
 	select userid, username, post, addr1, addr2,phone1,phone2,phone3,email1,email2 
-	from member where userid = #{userid}
+	from member 
+	where userid = #{userid}
 	</select>
 	
 	<update id="memberUpdate" parameterType="MemberDTO" >

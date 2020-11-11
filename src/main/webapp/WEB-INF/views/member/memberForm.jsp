@@ -53,7 +53,7 @@
  
  });
 </script>    
-<form action="memberAdd" method="post"> <!--  -->
+<form action="memberAdd" method="get"> <!--  -->
 *아이디:<input type="text" name="userid" id="userid">
 <span id="result"></span>
 <br> 

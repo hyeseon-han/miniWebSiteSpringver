@@ -13,8 +13,8 @@
 
 <c:if test="${!empty login }">	<!-- 세션에서 로그인 정보 검사 [로그인 된경우] -->
 안녕하세요. ${login.username }님 !<br>
-	<a href="LogoutServlet">로그아웃</a>
+	<a href="loginCheck/logout">로그아웃</a>
+	<a href="loginCheck/myPage">mypage</a>
 	<a href="CartListServlet">장바구니</a>
-	<a href="MyPageServlet">mypage</a>
 </c:if>
 
