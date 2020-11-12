@@ -24,8 +24,7 @@ public class LoginController {
 		String nextPage = null;
 		if(dto!=null) {
 			session.setAttribute("login", dto);
-			model.addAttribute("mesg","로그인 완료");
-			nextPage = "main";
+			nextPage = "redirect:/goodsList?gCategory=top"; //로그인시 상품목록을 가져오도록 redirect함 
 		}else {
 			model.addAttribute("mesg","로그인 실패");
 			nextPage = "loginForm";

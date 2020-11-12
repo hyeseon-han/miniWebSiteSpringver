@@ -13,9 +13,9 @@ public class MemberDAO {
 	@Autowired
 	SqlSessionTemplate template; //자동주입
 	
-	public void memberAdd(MemberDTO m) {
+	public int memberAdd(MemberDTO m) {
 		int n = template.insert("MemberMapper.memberAdd", m);
-		System.out.println(n);
+		return n;
 	}
 	
 	public MemberDTO login(Map<String,String> map) {
@@ -26,5 +26,10 @@ public class MemberDAO {
 	public MemberDTO mypage(String userid) {
 		MemberDTO dto = template.selectOne("MemberMapper.mypage", userid);
 		return dto;
+	}
+	
+	public int memberUpdate(MemberDTO m) {
+		int n = template.update("MemberMapper.memberUpdate", m);
+		return n;
 	}
 }

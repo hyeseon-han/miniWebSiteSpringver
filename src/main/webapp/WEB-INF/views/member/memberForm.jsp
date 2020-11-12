@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+<!-- <script type="text/javascript" src="js/jquery-3.3.1.js"></script> -->
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
     	//form 서브밋
@@ -36,18 +37,17 @@
 	
  $("#userid").on("keyup",function(event){	
 	 $.ajax({
+			url : "idDuplicateCheck",
 			type : "GET",
-			url : "MemberIdCheckServlet",
 			dataType : "text",
 			data : {
-				userid : $("#userid").val()
+				id : $("#userid").val()
 			},
 			success : function(responseData, status, xhr) {
-			    $("#result").text(responseData);
+				console.log(responseData);
+			    $("#result").text(responseData); //중복여부 화면에 출력 
 			},
-			error : function(xhr, status, error) {
-				console.log("error");
-			}
+			error : function(xhr, status, error) {} //처리 실패시 
 		});
 });
  

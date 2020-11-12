@@ -7,7 +7,7 @@
 
 <c:if test="${empty login }">	<!-- 세션에서 로그인 정보 검사 [로그인 안된경우] -->
 	<a href="loginForm">로그인</a> <!-- <servlet-context.xml>에 주소 등록되어 있음 -->
-	<a href="CartListServlet">장바구니</a>
+	<a href="loginCheck/CartList">장바구니</a>
 	<a href="memberForm">회원가입</a>
 </c:if>
 
@@ -15,6 +15,6 @@
 안녕하세요. ${login.username }님 !<br>
 	<a href="loginCheck/logout">로그아웃</a>
 	<a href="loginCheck/myPage">mypage</a>
-	<a href="CartListServlet">장바구니</a>
+	<a href="loginCheck/CartList">장바구니</a>
 </c:if>
 

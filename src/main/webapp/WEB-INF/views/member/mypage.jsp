@@ -3,11 +3,22 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("form").on("submit",function(event){
+			var email1 = $("#email1").val();
+			var email2 = $("#email2").val();
+			if(email1.length == 0 || email2.length == 0){
+				event.preventDefault();
+				alert("email 확인");
+			}
+		}); //MemberController에 memberUpdate함수 작성 데이터 출력까지 작성 
+	});
+</script>
 
-
-<form action="MemberUpdateServlet" method="get">
+<form action="loginCheck/memberUpdate" method="get">
 <input type="hidden" value="${login.userid}" name = "userid">
 *아이디: ${login.userid }<br>
 <br> 
