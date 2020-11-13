@@ -19,6 +19,8 @@
 		view-name="loginForm" />
 	<mvc:view-controller path="/myPage"
 		view-name="mypage" />
+	<mvc:view-controller path="/cartList"
+		view-name="cartList" />
 
 	<mvc:resources location="/WEB-INF/views/images/" mapping="/images/**"></mvc:resources>
 	<mvc:resources location="/WEB-INF/views/css/" mapping="/css/**"></mvc:resources>

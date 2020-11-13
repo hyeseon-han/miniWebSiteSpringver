@@ -1,17 +1,17 @@
 <%@page import="com.dto.GoodsDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-String mesg = (String)session.getAttribute("mesg");
-if(mesg!=null){
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<c:if test="${!empty mesg }">
 <script>
-alert('<%=mesg%>');
+alert("${mesg} 상품을 장바구니에 담았습니다.");
 </script>
-<%
+</c:if>
+<%if(session.getAttribute("mesg")!=null){//장바구니 담기에서 온 메세지가 있는 경우 삭제 
+	session.removeAttribute("mesg");
 }
-session.removeAttribute("mesg");
-%>    
+	%>    
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
 $(document).ready(function () {
@@ -24,7 +24,7 @@ $(document).ready(function () {
 			alert("색상을 선택하세요.");
 			return false;
 		}
-		$("form").attr("action","GoodsCartServlet");
+		$("form").attr("action","loginCheck/cartAdd");
 	}); //#check click
 	var count = 1;
 	
@@ -50,20 +50,13 @@ $(document).ready(function () {
 	
 });
 </script>
-<%
-  //상품정보 파싱 
-  GoodsDTO dto = (GoodsDTO)request.getAttribute("goodsRetrieve");
-String gCode = dto.getgCode();
-String gName = dto.getgName();
-int gPrice = dto.getgPrice();
-String gImage = dto.getgImage();
-%>    
+  
 <form name="goodRetrieveForm" method="GET" action="#">
 	    <!-- hidden  tag생성 -->
-	    <input type="hidden" name = "gImage" value = "<%=gImage%>">
-	    <input type="hidden" name = "gCode" value = "<%=gCode%>">
-	    <input type="hidden" name = "gName" value = "<%=gName%>">
-	    <input type="hidden" name = "gPrice" value = "<%=gPrice%>">
+	    <input type="hidden" name = "gImage" value = "${goodsRetrieve.gImage }">
+	    <input type="hidden" name = "gCode" value = "${goodsRetrieve.gCode }">
+	    <input type="hidden" name = "gName" value = "${goodsRetrieve.gName }">
+	    <input type="hidden" name = "gPrice" value = "${goodsRetrieve.gPrice }">
 
 	<table width="100%" cellspacing="0" cellpadding="0">
 		<tr>
@@ -88,21 +81,21 @@ String gImage = dto.getgImage();
 					</tr>
 
 					<tr>
-						<td rowspan="7"><img src="images/items/<%=gImage%>.gif"
+						<td rowspan="7"><img src="images/items/${goodsRetrieve.gImage }.gif"
 							border="0" align="center" width="300" /></td>
 						<td class="td_title">제품코드</td>
-						<td class="td_default" colspan="2" style='padding-left: 30px'><%=gCode%>
+						<td class="td_default" colspan="2" style='padding-left: 30px'>${goodsRetrieve.gCode }
 						
 						</td>
 					</tr>
 					<tr>
 						<td class="td_title">상품명</td>
-						<td class="td_default" colspan="2" style='padding-left: 30px'><%=gName%></td>
+						<td class="td_default" colspan="2" style='padding-left: 30px'>${goodsRetrieve.gName }</td>
 					</tr>
 					<tr>
 						<td class="td_title">가격</td>
 
-						<td class="td_red" colspan="2" style='padding-left: 30px'><%=gPrice%>
+						<td class="td_red" colspan="2" style='padding-left: 30px'>${goodsRetrieve.gPrice }
 						
 						</td>
 					</tr>
