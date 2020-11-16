@@ -1,5 +1,6 @@
 package com.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,16 @@ public class GoodsService {
 	public List<CartDTO> cartList(String userid) {
 		List<CartDTO> list = dao.cartList(userid);
 		return list;
+	}
+	
+	public int cartUpdate(HashMap<String, String> map) {
+		int n = dao.cartUpdate(map);
+		return n;
+	}
+	
+	public int cartDelete(int num) {
+		int n = dao.cartDelete(num);
+		return n;
 	}
 
 }

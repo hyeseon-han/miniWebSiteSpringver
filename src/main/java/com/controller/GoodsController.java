@@ -1,5 +1,6 @@
 package com.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -32,7 +34,7 @@ public class GoodsController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("goodsList",list);
 		//request.setAttribute("goodsList",list")와 동일
-		mav.setViewName("main");
+		mav.setViewName("main"); //main.jsp // goodList.jsp
 		return mav;
 	}
 	
@@ -60,6 +62,19 @@ public class GoodsController {
 		attr.addFlashAttribute("cartList", list); //redirect 데이터 전달 
 		return "redirect:../cartList";// servlet-context에 등록
 	}
+	
+	@RequestMapping(value = "loginCheck/cartUpdate")
+	@ResponseBody
+	public void cartUpdate(@RequestParam HashMap<String, String> map ) {//한글설정 필요 없음
+		service.cartUpdate(map);
+	}
+	
+	@RequestMapping(value = "loginCheck/cartDelete")
+	@ResponseBody //비동기 사용하기 위해 사용 
+	public void cartDel(@RequestParam("num") int num) {
+		service.cartDelete(num);
+	}
+	
 	
 	
 }

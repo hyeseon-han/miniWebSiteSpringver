@@ -1,6 +1,7 @@
 package com.dao;
 
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -33,5 +34,15 @@ public class GoodsDAO {
 	public List<CartDTO> cartList(String userid) {
 		List<CartDTO> list = template.selectList("CartMapper.cartList", userid);
 		return list;
+	}
+	
+	public int cartUpdate(HashMap<String, String> map) {
+		int n = template.update("CartMapper.cartUpdate", map);
+		return n;
+	}
+	
+	public int cartDelete(int num) {
+		int n = template.delete("CartMapper.cartDel",num);
+		return n;
 	}
 }

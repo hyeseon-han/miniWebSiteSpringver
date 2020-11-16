@@ -12,7 +12,7 @@
 	<mvc:annotation-driven />
 	<mvc:default-servlet-handler />
 
-	<mvc:view-controller path="/" view-name="main" />
+	<!-- <mvc:view-controller path="/" view-name="main" /> -->
 	<mvc:view-controller path="/memberForm"
 		view-name="memberForm" />
 	<mvc:view-controller path="/loginForm"

@@ -7,7 +7,19 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
+	//총합구하기
+	function totalXXX(){
+		   var totalSum = 0;
+		   $(".sum").each(function(idx, data) {
+		      totalSum += Number.parseInt($(data).text());
+		   });
+		   $("#totalSum").text(totalSum);
+		}
+	
 	$(document).ready(function () {
+		
+		totalXXX();
+		
 		//전체선택
 		$("#allCheck").on("click",function(){
 			var result = this.checked;
@@ -19,7 +31,23 @@
 		//삭제버튼
 		$(".delBtn").on("click",function(){
 			var num = $(this).attr("data-xxx");
-			location.href = "CartDelServlet?num="+num;
+			var xxx = $(this);
+			$.ajax({
+				type : "GET",
+				url : "loginCheck/cartDelete",
+				dataType : "text",
+				data : {
+					num:num
+				},
+				success : function(responseData, status, xhr) {
+					console.log("success");
+					//dom삭제
+					xxx.parents().filter("tr").remove(); //tr태그 삭제 비동기 처리 
+				},
+				error : function(xhr, status, error) {
+					console.log("error");
+				}
+			})
 		});
 		
 		//수정버튼
@@ -34,7 +62,7 @@
 			
 			$.ajax({
 				type : "GET",
-				url : "CartUpdateServlet",
+				url : "loginCheck/cartUpdate",
 				dataType : "text",
 				data : {
 					num:num,
@@ -72,7 +100,10 @@
 			var num = $(this).attr("data-xxx");
 			location.href = "CartOrderConfirmServlet?num="+num;
 		});
+		
 	});
+	
+	
 </script>
 <table width="90%" cellspacing="0" cellpadding="0" border="0">
 
@@ -153,7 +184,7 @@
 				data-price = "${x.gPrice }">
 				</td>
 			<td class="td_default" align="center" width="80"
-				style='padding-left: 5px'><span id="sum${x.num }">
+				style='padding-left: 5px'><span id="sum${x.num }" class="sum">
 				${x.gPrice * x.gAmount }
 				</span></td>
 			<td><input type="button" value="주문" class = "orderBtn" data-xxx = "${x.num }"></td>
@@ -168,6 +199,7 @@
 	</form>
 	<tr>
 		<td colspan="10">
+			총합: <span id="totalSum"></span>
 			<hr size="1" color="CCCCCC">
 		</td>
 	</tr>
