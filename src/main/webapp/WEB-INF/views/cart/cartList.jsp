@@ -16,6 +16,7 @@
 		   $("#totalSum").text(totalSum);
 		}
 	
+	
 	$(document).ready(function () {
 		
 		totalXXX();
@@ -79,7 +80,7 @@
 			})
 		});
 		
-		//전체 cart 삭제
+		/* //전체 cart 삭제
 		$("#delAllCart").on("click",function(){
 			var num = [];
 			$("input:checkbox[name='check']:checked").each(function (idx,ele) {
@@ -87,6 +88,12 @@
 			});
 			//console.log('num',num);
 			location.href = "CartDelAllServlet?data="+num;
+		}); */
+		
+		//전체 cart 삭제
+		$("#delAllCart").on("click",function(){
+			$("form").attr("action","loginCheck/delAllCart");
+			$("form").submit();
 		});
 		
 		//전체 cart 삭제2
@@ -98,7 +105,7 @@
 		//주문버튼 
 		$(".orderBtn").on("click",function(){
 			var num = $(this).attr("data-xxx");
-			location.href = "CartOrderConfirmServlet?num="+num;
+			location.href = "loginCheck/orderConfirm?num="+num;
 		});
 		
 	});
@@ -212,7 +219,7 @@
 			<a class="a_black"href="javascript:orderAllConfirm(myForm)"> 전체 주문하기 </a>&nbsp;&nbsp;&nbsp;&nbsp; 
 			<a class="a_black" href="#" id = "delAllCart"> 전체 삭제하기 </a>&nbsp;&nbsp;&nbsp;&nbsp;
 			<a class="a_black" href="#" id = "delAllCart2"> 전체 삭제하기2 </a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a class="a_black" href="main"> 계속 쇼핑하기 </a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a class="a_black" href="goodsList?gCategory=top"> 계속 쇼핑하기 </a>&nbsp;&nbsp;&nbsp;&nbsp;
 		</td>
 	</tr>
 	<tr>

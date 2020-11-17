@@ -1,5 +1,6 @@
 package com.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -43,6 +44,16 @@ public class GoodsService {
 	public int cartDelete(int num) {
 		int n = dao.cartDelete(num);
 		return n;
+	}
+	
+	public int delAllCart(ArrayList<String> list) {
+		int n = dao.delAllCart(list);
+		return n;
+	}
+	
+	public CartDTO orderConfirmByNum(int num) {
+		CartDTO dto = dao.orderConfirmByNum(num);
+		return dto;
 	}
 
 }
