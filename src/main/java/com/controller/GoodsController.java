@@ -101,10 +101,19 @@ public class GoodsController {
 	} 
 	
 	@RequestMapping(value = "loginCheck/orderDone")
-	public void orderDone(@RequestParam("orderNum") int num, OrderDTO Odto) {
+	public String orderDone(OrderDTO Odto, int orderNum, HttpSession session, RedirectAttributes xxx) {
 		//Odto를 파싱할 필요가 없음. orderConfirm.jsp에서 변수명도 모두 동일하므로 자동으로 OrderDTO형태로 꽂힘
-		System.out.println("num=>" + num);
-		System.out.println("Odto=>" + Odto);
+		System.out.println(Odto + "\t" + orderNum);
+		MemberDTO dto = (MemberDTO)session.getAttribute("login");
+		Odto.setUserid(dto.getUserid()); // 사용자 ID설정
+		Odto.setNum(orderNum); // 주문번호 설정
+		service.orderDone(Odto,orderNum); //tx처리 service에서 
+		xxx.addFlashAttribute("Odto", Odto);
+		return "redirect:../orderDone";
+		
+				
 	}
+	
+	
 	
 }

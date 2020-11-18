@@ -6,10 +6,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dao.GoodsDAO;
 import com.dto.CartDTO;
 import com.dto.GoodsDTO;
+import com.dto.OrderDTO;
 
 @Service
 public class GoodsService {
@@ -55,5 +57,12 @@ public class GoodsService {
 		CartDTO dto = dao.orderConfirmByNum(num);
 		return dto;
 	}
+	
+   @Transactional
+   public void orderDone(OrderDTO Odto, int orderNum) {
+      dao.orderDone(Odto); //주문정보 저장 - insert
+      dao.cartDelete(orderNum); //카트에서 삭제 두 처리를 tx 처리함  root-context.xml에
+      // tx-Manager등록필요
+   }
 
 }

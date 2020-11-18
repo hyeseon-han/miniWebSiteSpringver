@@ -1,29 +1,9 @@
 <%@page import="com.dto.OrderDTO"%>
-<%@page import="com.dto.MemberDTO"%>
-<%@page import="com.dto.CartDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-<script>
-$(document).ready(function(){
-	
-		
-});
-</script>
-<%
-  //데이터 파싱
-  OrderDTO dto = (OrderDTO)request.getAttribute("orderDTO");
-	String userid = dto.getUserid();
-	String ordername = dto.getOrderName();
-	String post = dto.getPost();
-	String addr1 = dto.getAddr1();
-	String addr2 = dto.getAddr2();
-	String phone = dto.getPhone();
-	int gAmount = dto.getgAmount();
-	int gPrice = dto.getgPrice();
-	String gname = dto.getgName();
-	String payMethod = dto.getPayMethod();
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <table width="70%" cellspacing="0" cellpadding="0">
 
 	<tr>
@@ -47,7 +27,7 @@ $(document).ready(function(){
 	</tr>
 
 	<tr>
-		<td class="td_default" align="center"><b><%=userid %></b> 님의 주문이
+		<td class="td_default" align="center"><b>${Odto.userid}</b> 님의 주문이
 			안전하게 처리되었습니다.</td>
 	</tr>
 
@@ -70,21 +50,21 @@ $(document).ready(function(){
 				bordercolor="#CCCCCC">
 				<tr>
 					<td class="td_default" width="150" height="35"> 받으시는 분</td>
-					<td class="td_default" height="35"> <%=ordername %></td>
+					<td class="td_default" height="35"> ${Odto.orderName}</td>
 				</tr>
 				<tr>
 					<td class="td_default" height="35"> 주소</td>
-					<td class="td_default" height="35"> (<%=post %>)<br>
+					<td class="td_default" height="35"> (${Odto.post})<br>
 						&nbsp;
 					</td>
 				</tr>
 				
 				<tr>
 					<td class="td_default" height="35"> 휴대전화</td>
-					<td class="td_default" height="35"> <%=phone %></td>
+					<td class="td_default" height="35"> ${Odto.phone}</td>
 				</tr>
 			</table>
-	</tr>
+	</tr>  
 	</td>
 
 	<tr>
@@ -101,26 +81,20 @@ $(document).ready(function(){
 					<td class="td_default" width="50" height="35" align="center"><strong>수량</strong></td>
 					<td class="td_default" width="100" height="35" align="center"><strong>합계</strong></td>
 				</tr>
-
-				
-				
 				<tr>
 					<td height="35" class="td_default">
-						<span class="a_default"><%=gname %></span>
+						<span class="a_default">${Odto.gName}</span>
 					</td>
 					<td height="35" class="td_default" align="center">
-						<span  id = "price1"><%=gPrice %></span>원
+						<span  id = "price1">${Odto.gPrice}</span>원
 					</td>
 					<td height="35" class="td_default" align="center">
-						<span id = "num1"><%=gAmount %></span>건
+						<span id = "num1">${Odto.gAmount}</span>건
 					</td>
 					<td height="35" class="td_default" align="center">
-						<span><%= gAmount*gPrice %></span>원
+						<span>${ Odto.gPrice * Odto.gAmount }</span>원
 					</td>
 				</tr>
-				
-				
-
 			</table>
 		</td>
 	</tr>
@@ -144,13 +118,13 @@ $(document).ready(function(){
 				<tr>
 					<td class="td_default" width="150" height="35"> 결제금액</td>
 					<td class="td_default" height="35" align = 'right'> 
-					<input type = 'text' id = 'total' value = '<%=gAmount*gPrice %>' readonly>원
+					<input type = 'text' id = 'total' value = '${Odto.gAmount * Odto.gPrice}' readonly>원
 					</td>
 				</tr>
 				<tr>
 					<td class="td_default" width="150" height="35"> 결제수단</td>
 					<td class="td_default" height="35" align = 'right'> 
-					<span><%=payMethod %></span>
+					<span>${Odto.payMethod}</span>
 					</td>
 				</tr>
 			</table>

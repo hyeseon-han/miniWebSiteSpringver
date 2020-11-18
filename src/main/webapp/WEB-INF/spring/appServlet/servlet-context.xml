@@ -23,6 +23,8 @@
 		view-name="cartList" />
 	<mvc:view-controller path="/orderConfirm"
 		view-name="orderConfirm" />
+	<mvc:view-controller path="/orderDone"
+		view-name="orderDone" />
 
 	<mvc:resources location="/WEB-INF/views/images/" mapping="/images/**"></mvc:resources>
 	<mvc:resources location="/WEB-INF/views/css/" mapping="/css/**"></mvc:resources>
